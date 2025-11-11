@@ -1,0 +1,13 @@
+services:
+  app:
+    build: .
+    ports:
+      - "${APP_PORT:-8000}:8000"
+    volumes:
+      - .:/app
+    working_dir: /app
+
+    command: /bin/bash
+    # command: sh -c "poetry install --no-root && cd app && poetry run litestar --app main:app run --host 0.0.0.0 --port 8000 -r"
+    # command: sh -c "poetry install --no-root && cd app && poetry run python lite.py"
+    tty: true

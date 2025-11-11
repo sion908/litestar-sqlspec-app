@@ -1,0 +1,106 @@
+### Litestar + SQLSpec Todo API テスト用リクエスト
+### 環境変数からポート番号を取得
+
+### 変数定義
+@baseUrl = http://localhost:8000
+@contentType = application/json
+
+### タスク一覧取得
+GET {{baseUrl}}/tasks
+
+###
+
+### 新規タスク作成
+POST {{baseUrl}}/tasks
+Content-Type: {{contentType}}
+
+{
+  "title": "買い物に行く",
+  "description": "牛乳と卵を買う",
+  "priority": "medium",
+  "due_date": "2023-12-31T23:59:59"
+}
+
+###
+
+### タスク作成（シンプル版）
+POST {{baseUrl}}/tasks
+Content-Type: {{contentType}}
+
+{
+  "title": "会議の準備",
+  "completed": false,
+  "priority": "high"
+}
+
+###
+
+### 高優先度タスク一覧取得
+GET {{baseUrl}}/tasks?priority=high&limit=5
+
+###
+
+### 完了済みタスク一覧取得
+GET {{baseUrl}}/tasks?completed=true
+
+###
+
+### 特定タスク取得（ID: 1）
+GET {{baseUrl}}/tasks/1
+
+###
+
+### タスク更新
+PUT {{baseUrl}}/tasks/1
+Content-Type: {{contentType}}
+
+{
+  "title": "買い物に行く（更新済み）",
+  "completed": true,
+  "priority": "low"
+}
+
+###
+
+### タスクの部分更新（タイトルのみ）
+PUT {{baseUrl}}/tasks/1
+Content-Type: {{contentType}}
+
+{
+  "title": "買い物に行く（タイトル修正）"
+}
+
+###
+
+### タスク削除
+DELETE {{baseUrl}}/tasks/1
+
+###
+
+### 存在しないタスクの取得（404エラー確認）
+GET {{baseUrl}}/tasks/999
+
+###
+
+### バリデーションエラーテスト（空タイトル）
+POST {{baseUrl}}/tasks
+Content-Type: {{contentType}}
+
+{
+  "title": "",
+  "description": "空タイトルのテスト"
+}
+
+###
+
+### OpenAPIスキーマ取得
+GET {{baseUrl}}/schema
+
+###
+
+### APIドキュメント（Swagger UI）確認用
+### ブラウザで以下のURLにアクセス
+### {{baseUrl}}/schema/swagger
+
+### ヘルスチェック（サーバー状態確認）
+GET {{baseUrl}}/

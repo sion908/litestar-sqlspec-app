@@ -1,0 +1,22 @@
+[project]
+name = "litestar-sqlspec-app"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "sion908"}
+]
+readme = "README.md"
+requires-python = ">=3.12,<4.0"
+
+[tool.poetry.dependencies]
+sqlspec = { path = "./sqlspec", develop = true, extras = ["asyncpg", "sqlite"] }
+litestar = {extras = ["standard"], version = "^2.18.0"}
+pydantic = "^2.12.4"
+httpx = "^0.28.1"
+pydantic-settings = "^2.12.0"
+aiosqlite = "^0.21.0"
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
